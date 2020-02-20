@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type=text],
+    input[type=tel],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      /*   
+      box-sizing: border-box;  
+      margin-top: 6px;
+      margin-bottom: 16px;
+      */
+      resize: vertical;
+    }
+
+    label {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 40px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    .container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    .col-25 {
+      float: left;
+      width: 25%;
+      margin-top: 6px;
+    }
+
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+
+      .col-25,
+      .col-75,
+      input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    /* The popup form - hidden by default */
+    .popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .popup-container {
+      max-width: 300px;
+      padding: 10px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    .popup-container input[type=text],
+    .popup-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .popup-container input[type=text]:focus,
+    .popup-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .popup-container .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .popup-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .popup-container .btn:hover,
+    .open-button:hover {
+      opacity: 1;
+    }
+  </style>
+  <title> Example Web Page</title>
+</head>
+
+<body>
+  <h3>Contact Form</h3>
+  <div class="container">
+    <form>
+      <!-- In the user input fields, the phone number is required. Be sure to match the case of the 
+         Web2Campaign parameter name to the field name in the Administrator VCC. -->
+      <div class="row">
+        <div class="col-25">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="first_name" name="first_name" placeholder="Your name..">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="last_name">Last Name</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="last_name" name="last_name" placeholder="Your last name..">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="company">Company</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="company" maxLength="60" name="company" placeholder="Your company..">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="number1">Phone</label>
+        </div>
+        <div class="col-75">
+          <input type="tel" id="number1" name="number1" pattern="[0-9]*" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="street">Address</label>
+        </div>
+        <div class="col-75">
+          <textarea name="street" id="street" placeholder="Street address.." style="height:100px"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="city">City</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="city" maxLength="20" name="city" placeholder="City..">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="state">State/Province</label>
+        </div>
+        <div class="col-75">
+          <select id="state" name="state">
+            <option value="AZ">Arizona</option>
+            <option value="CA">California</option>
+            <option value="NV">Nevada</option>
+            <option value="OR">Oregon</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25"> <label for="zip">ZIP</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="zip" maxLength="20" name="zip" placeholder="Zip code.." pattern="[0-9]*">
+        </div>
+      </div>
+
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+
+  <!-- Login Popup -->
+  <div class="popup" id="myForm">
+    <div class="popup-container">
+      <h1>Login</h1>
+      <label for="username"><b>User Name</b></label>
+      <input type="text" placeholder="Enter User Name" name="username" id="username" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+      <button type="button" class="btn" onclick="done()">Login</button>
+      <button type="button" class="btn cancel" onclick="hidePopup()">Close</button>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  const F9URL = 'https://api.five9.com';
+  const Web2CampaignURL = F9URL + '/web2campaign/AddToList';
+  let auth = '';   //Authorization string. Don't hardcode it in the page. 
+  //See documentation. Login pop-up appears if empty.
+  const yourDomain = 'your_domain_name>';
+  const yourList = 'name_of_your_call_list';
+
+  const form = document.querySelector('form');
+
+  function sendHttpRequest(method, url, data) {
+    return fetch(url, {
+      method: method,
+      body: data,
+      headers: {
+        'Authorization': 'Basic:' + auth,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      redirect: 'follow'
+    })
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response.text().then(retHtml => {
+            document.open();
+            document.write(retHtml);
+            document.close();
+          });
+        } else {
+          return response.json().then(errData => {
+            console.log(errData);
+            throw new Error('Something went wrong - server-side.');
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        throw new Error('Something went wrong!');
+      });
+  }
+
+  async function createPost() {
+    // Add the required fields:
+    const fd = [
+      `F9domain=${encodeURIComponent(yourDomain)}`,
+      `F9list=${encodeURIComponent(yourList)}`,
+      `F9key=number1`
+    ];
+    // Add entered form fields:
+    const inputs = form.elements;
+    for (let el of inputs) {
+      if (el.nodeName === "INPUT" && (el.type === "text" || el.type === "tel" || el.type === "textarea")
+        || el.nodeName === "SELECT") {
+        fd.push(`${el.name}=${encodeURIComponent(el.value)}`);
+      }
+    }
+    // Add optional fields: 
+    fd.push(
+      `F9retResults=1`,                      // set to 1 to append a result code to the result
+      `F9updateCRM=1`,                       // set to 1 to update all the fields in the list
+      `F9CallASAP=1`,                        // set to 1 to dial the number as soon as possible.
+      // `F9TimeToCAll=${call_time}`,        // set the date and time to call the number
+      // `F9TimeFormat=${call_time_format}`, // set the time format if you are using the F9TimeToCall parameter
+      // `F9retURL=${your_url}`,             // fully qualified URL to display the result
+    );
+    sendHttpRequest('POST', Web2CampaignURL, fd.join('&'));
+  }
+
+  function done() {
+    hidePopup();
+    auth = window.btoa(document.getElementById("username").value + ":" + document.getElementById("psw").value);
+    createPost();
+  };
+
+  function showPopup() {
+    //    document.getElementById("popup").style.display = "block";
+    document.getElementById("myForm").style.display = "block";
+  }
+  function hidePopup() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    //Request username and password
+    if (auth.length === 0) {
+      showPopup();
+    } else {
+      createPost();
+    }
+  });
+
+</script>
+
+</html>
