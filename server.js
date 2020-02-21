@@ -1,25 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-const w2c = require('./routes/web2campaign');
-const rootDir = require('./utils/path');
+const w2cRoutes = require('./routes/web2campaign');
+const errorController = require('./controllers/error');
 
 const app = express();
-app.set("view engine", "pug");
-app.set("views", "views")
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")))
 
-app.use('/web2campaign', w2c);
-app.use('/admin', adminData.routes);
+app.use('/web2campaign', w2cRoutes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use((req,resp) => {
-    resp.status(404).sendFile(path.join(rootDir, "views", "404.html"));
-});
+app.use(errorController.get404);
 
 app.listen(3000);
