@@ -5,7 +5,7 @@ exports.getProducts = (req, resp, next) => {
         resp.render("shop/product-list", {
             prods: products,
             pageTitle: "All Products",
-            path: "/shop/product-list"
+            path: "/product-list"
         });
     });
 };
@@ -23,14 +23,14 @@ exports.getIndex = (req, resp, next) => {
 exports.getCart = (req, resp, next) => {
     resp.render("shop/cart", {
         pageTitle: "Your Cart",
-        path: "/shop/cart"
+        path: "/cart"
     });
 };
 
 exports.getOrders = (req, resp, next) => {
     resp.render("shop/orders", {
         pageTitle: "Your Orders",
-        path: "/shop/orders"
+        path: "/orders"
     });
 };
 

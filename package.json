@@ -1,5 +1,5 @@
 {
-  "name": "ass1",
+  "name": "fivenights",
   "version": "1.0.0",
   "description": "My test server #1",
   "main": "server.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "author": "",
+  "author": "S.Krupnov",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.2"
@@ -18,5 +18,13 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "pug": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cepreu/fivenights.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cepreu/fivenights/issues"
+  },
+  "homepage": "https://github.com/Cepreu/fivenights#readme"
 }
